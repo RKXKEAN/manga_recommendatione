@@ -51,6 +51,30 @@ manga_list = [
         "rating": 8.5,
         "description": "Asta and Yuno are orphans raised in a church. Yuno has exceptional magical powers while Asta has none. However, Asta receives the rare five-leaf clover grimoire that gives him the power of anti-magic.",
     },
+    {
+        "id": 7,
+        "title": "One Punch",
+        "author": "Yusuke Murata",
+        "genre": "Action, Comedy",
+        "rating": 8.4,
+        "description": "Saitama is a hero who can defeat any opponent with a single punch but seeks a worthy opponent after growing bored by a lack of challenge in his fight against evil.",
+    },
+    {
+        "id": 8,
+        "title": "Tokyo Ghoul",
+        "author": "Sui Ishida",
+        "genre": "Action, Horror",
+        "rating": 8.3,
+        "description": "Ken Kaneki becomes a half-ghoul after a date with a beautiful.",
+    },
+    {
+        "id": 9,
+        "title": "The Promised Neverland",
+        "author": "Kaiu Shirai",
+        "genre": "Mystery, Thriller",
+        "rating": 8.2,
+        "description": "Emma, Norman, and Ray plan to escape from Grace Field House, an orphanage where children are raised as food for demons.",
+    },
 ]
 
 
