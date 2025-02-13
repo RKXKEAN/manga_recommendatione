@@ -9,7 +9,7 @@ manga_list = [
         "author": "Eiichiro Oda",
         "genre": "Action, Adventure",
         "rating": 9.5,
-        "description": "A story about pirates and the search for the ultimate treasure, One Piece.",
+        "description": "Monkey D. Luffy and his crew of pirates embark on a quest to find the One Piece treasure and become the Pirate King.",
     },
     {
         "id": 2,
@@ -17,7 +17,7 @@ manga_list = [
         "author": "Hajime Isayama",
         "genre": "Action, Drama",
         "rating": 9.0,
-        "description": "Humanity's battle against giant humanoid Titans.",
+        "description": "Eren Yeager and his friends join the Scout Regiment to fight the Titans and uncover the truth behind their existence.",
     },
     {
         "id": 3,
@@ -25,7 +25,7 @@ manga_list = [
         "author": "Masashi Kishimoto",
         "genre": "Action, Fantasy",
         "rating": 8.9,
-        "description": "A young ninja's journey to become the strongest Hokage.",
+        "description": "Naruto Uzumaki, a young ninja with a sealed demon fox spirit inside him, dreams of becoming the strongest ninja and the Hokage of his village.",
     },
     {
         "id": 4,
