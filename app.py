@@ -27,6 +27,30 @@ manga_list = [
         "rating": 8.9,
         "description": "A young ninja's journey to become the strongest Hokage.",
     },
+    {
+        "id": 4,
+        "title": "My Hero Academia",
+        "author": "Kohei Horikoshi",
+        "genre": "Action, Superhero",
+        "rating": 8.7,
+        "description": "In a world of superpowers, Izuku Midoriya inherits One For All and trains at U.A. High to become a hero, facing rivals, villains, and his destiny.",
+    },
+    {
+        "id": 5,
+        "title": "Demon Slayer",
+        "author": "Koyoharu Gotouge",
+        "genre": "Action, Dark Fantasy",
+        "rating": 8.6,
+        "description": "Tanjiro Kamado becomes a demon slayer to avenge his family and cure his sister Nezuko, who is turning into a demon.",
+    },
+    {
+        "id": 6,
+        "title": "Black Clover",
+        "author": "Yūki Tabata",
+        "genre": "Action, Fantasy",
+        "rating": 8.5,
+        "description": "Asta and Yuno are orphans raised in a church. Yuno has exceptional magical powers while Asta has none. However, Asta receives the rare five-leaf clover grimoire that gives him the power of anti-magic.",
+    },
 ]
 
 
