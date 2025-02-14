@@ -1,95 +1,64 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///manga.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-manga_list = [
-    {
-        "id": 1,
-        "title": "One Piece",
-        "author": "Eiichiro Oda",
-        "genre": "Action, Adventure",
-        "rating": 9.5,
-        "description": "Monkey D. Luffy and his crew of pirates embark on a quest to find the One Piece treasure and become the Pirate King.",
-    },
-    {
-        "id": 2,
-        "title": "Attack on Titan",
-        "author": "Hajime Isayama",
-        "genre": "Action, Drama",
-        "rating": 9.0,
-        "description": "Eren Yeager and his friends join the Scout Regiment to fight the Titans and uncover the truth behind their existence.",
-    },
-    {
-        "id": 3,
-        "title": "Naruto",
-        "author": "Masashi Kishimoto",
-        "genre": "Action, Fantasy",
-        "rating": 8.9,
-        "description": "Naruto Uzumaki, a young ninja with a sealed demon fox spirit inside him, dreams of becoming the strongest ninja and the Hokage of his village.",
-    },
-    {
-        "id": 4,
-        "title": "My Hero Academia",
-        "author": "Kohei Horikoshi",
-        "genre": "Action, Superhero",
-        "rating": 8.7,
-        "description": "In a world of superpowers, Izuku Midoriya inherits One For All and trains at U.A. High to become a hero, facing rivals, villains, and his destiny.",
-    },
-    {
-        "id": 5,
-        "title": "Demon Slayer",
-        "author": "Koyoharu Gotouge",
-        "genre": "Action, Dark Fantasy",
-        "rating": 8.6,
-        "description": "Tanjiro Kamado becomes a demon slayer to avenge his family and cure his sister Nezuko, who is turning into a demon.",
-    },
-    {
-        "id": 6,
-        "title": "Black Clover",
-        "author": "Yūki Tabata",
-        "genre": "Action, Fantasy",
-        "rating": 8.5,
-        "description": "Asta and Yuno are orphans raised in a church. Yuno has exceptional magical powers while Asta has none. However, Asta receives the rare five-leaf clover grimoire that gives him the power of anti-magic.",
-    },
-    {
-        "id": 7,
-        "title": "One Punch",
-        "author": "Yusuke Murata",
-        "genre": "Action, Comedy",
-        "rating": 8.4,
-        "description": "Saitama is a hero who can defeat any opponent with a single punch but seeks a worthy opponent after growing bored by a lack of challenge in his fight against evil.",
-    },
-    {
-        "id": 8,
-        "title": "Tokyo Ghoul",
-        "author": "Sui Ishida",
-        "genre": "Action, Horror",
-        "rating": 8.3,
-        "description": "Ken Kaneki becomes a half-ghoul after a date with a beautiful.",
-    },
-    {
-        "id": 9,
-        "title": "The Promised Neverland",
-        "author": "Kaiu Shirai",
-        "genre": "Mystery, Thriller",
-        "rating": 8.2,
-        "description": "Emma, Norman, and Ray plan to escape from Grace Field House, an orphanage where children are raised as food for demons.",
-    },
-]
+db = SQLAlchemy(app)
+
+
+class Manga(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    author = db.Column(db.String(100), nullable=False)
+    genre = db.Column(db.String(100), nullable=False)
+    rating = db.Column(db.Float, nullable=False)
+    description = db.Column(db.Text, nullable=False)
 
 
 @app.route("/")
 def home():
-    return render_template("index.html", manga_list=manga_list)
+    mangas = Manga.query.all()
+    return render_template("index.html", mangas=mangas)
 
 
 @app.route("/manga/<int:manga_id>")
 def manga_detail(manga_id):
-    manga = next((m for m in manga_list if m["id"] == manga_id), None)
-    if manga:
-        return render_template("detail.html", manga=manga)
-    return "Manga not found", 404
+    manga = Manga.query.get_or_404(manga_id)
+    return render_template("detail.html", manga=manga)
+
+
+@app.route("/add", methods=["GET", "POST"])
+def add_manga():
+    if request.method == "POST":
+        title = request.form["title"]
+        author = request.form["author"]
+        genre = request.form["genre"]
+        rating = float(request.form["rating"])
+        description = request.form["description"]
+        new_manga = Manga(
+            title=title,
+            author=author,
+            genre=genre,
+            rating=rating,
+            description=description,
+        )
+        db.session.add(new_manga)
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("add.html")
+
+
+@app.route("/delete/<int:manga_id>")
+def delete_manga(manga_id):
+    manga = Manga.query.get_or_404(manga_id)
+    db.session.delete(manga)
+    db.session.commit()
+    return redirect(url_for("home"))
 
 
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
