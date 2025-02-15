@@ -50,12 +50,14 @@ def add_manga():
     return render_template("add.html")
 
 
-@app.route("/delete/<int:manga_id>")
+@app.route("/delete/<int:manga_id>", methods=["GET", "POST"])
 def delete_manga(manga_id):
     manga = Manga.query.get_or_404(manga_id)
-    db.session.delete(manga)
-    db.session.commit()
-    return redirect(url_for("home"))
+    if request.method == "POST":
+        db.session.delete(manga)
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("delete.html", manga=manga)
 
 
 if __name__ == "__main__":
