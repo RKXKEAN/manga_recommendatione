@@ -31,6 +31,7 @@ class Manga(db.Model):
     title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text, nullable=False)
     author = db.Column(db.String(100), nullable=False)
+    rating = db.Column(db.Float, default=0.0)  # ⭐ เพิ่ม rating
 
 
 @login_manager.user_loader
@@ -98,7 +99,10 @@ def add_manga():
         title = request.form["title"]
         description = request.form["description"]
         author = request.form["author"]
-        new_manga = Manga(title=title, description=description, author=author)
+        rating = float(request.form["rating"])  # ⭐ เพิ่ม rating จากฟอร์ม
+        new_manga = Manga(
+            title=title, description=description, author=author, rating=rating
+        )
         db.session.add(new_manga)
         db.session.commit()
         flash("Manga added successfully!")
