@@ -35,6 +35,7 @@
                     <p>{{ manga.description[:100] }}...</p>
                     <p><strong>Author:</strong> {{ manga.author }}</p>
                     <p><strong>Rating:</strong> ⭐ {{ manga.rating }}/10</p>
+                    <p><strong>Genre:</strong> {{ manga.genre }}</p>
                 </div>
                 <div>
                     <a href="{{ url_for('manga_detail', id=manga.id) }}" class="btn btn-info btn-sm">View</a>
