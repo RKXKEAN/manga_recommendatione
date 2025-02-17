@@ -137,6 +137,12 @@ def delete_manga(id):
     return redirect(url_for("admin"))
 
 
+@app.route("/manga/<int:id>")
+def manga_detail(id):
+    manga = Manga.query.get_or_404(id)
+    return render_template("manga_detail.html", manga=manga)
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
