@@ -106,6 +106,37 @@ def add_manga():
     return render_template("add_manga.html")
 
 
+@app.route("/edit_manga/<int:id>", methods=["GET", "POST"])
+@login_required
+def edit_manga(id):
+    if not current_user.is_admin:
+        return redirect(url_for("home"))
+
+    manga = Manga.query.get_or_404(id)
+    if request.method == "POST":
+        manga.title = request.form["title"]
+        manga.description = request.form["description"]
+        manga.author = request.form["author"]
+        db.session.commit()
+        flash("Manga updated successfully!")
+        return redirect(url_for("admin"))
+
+    return render_template("edit_manga.html", manga=manga)
+
+
+@app.route("/delete_manga/<int:id>", methods=["POST"])
+@login_required
+def delete_manga(id):
+    if not current_user.is_admin:
+        return redirect(url_for("home"))
+
+    manga = Manga.query.get_or_404(id)
+    db.session.delete(manga)
+    db.session.commit()
+    flash("Manga deleted successfully!")
+    return redirect(url_for("admin"))
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
