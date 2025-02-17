@@ -41,9 +41,8 @@ def load_user(user_id):
 
 
 @app.route("/")
-def home():
-    mangas = Manga.query.all()
-    return render_template("home.html", mangas=mangas)
+def index():
+    return redirect(url_for("login"))  # Redirect ไปหน้า login
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -58,6 +57,13 @@ def login():
         else:
             flash("Invalid credentials")
     return render_template("login.html")
+
+
+@app.route("/home")
+@login_required
+def home():
+    mangas = Manga.query.all()
+    return render_template("home.html", mangas=mangas)
 
 
 @app.route("/register", methods=["GET", "POST"])
