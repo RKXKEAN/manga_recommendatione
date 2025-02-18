@@ -159,6 +159,16 @@ def manga_detail(id):
     return render_template("manga_detail.html", manga=manga)
 
 
+@app.route("/search")
+def search():
+    query = request.args.get("query", "")
+    if query:
+        mangas = Manga.query.filter(Manga.title.ilike(f"%{query}%")).all()
+    else:
+        mangas = []
+    return render_template("search.html", mangas=mangas, query=query)
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
