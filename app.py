@@ -169,6 +169,12 @@ def search():
     return render_template("search.html", mangas=mangas, query=query)
 
 
+@app.route("/top_mangas")
+def top_mangas():
+    top_mangas = Manga.query.order_by(Manga.rating.desc()).limit(10).all()
+    return render_template("top_mangas.html", mangas=top_mangas)
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
