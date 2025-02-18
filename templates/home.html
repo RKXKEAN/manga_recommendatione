@@ -6,6 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Manga Recommendation</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url('https://wallpapercave.com/wp/wp13859169.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        .navbar {
+            border-bottom: 5px solid black;
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 5px solid black;
+            border-radius: 10px;
+            box-shadow: 5px 5px 0px black;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-manga {
+            background: black;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-manga:hover {
+            background: white;
+            color: black;
+            border: 2px solid black;
+        }
+
+        .title-box {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 5px solid black;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 5px 5px 0px black;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,19 +76,18 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
-        <h1 class="text-center">Recommended Manga</h1>
-        <div class="row">
+    <div class="container mt-4 text-center">
+        <h1 class="title-box">📖 Recommended Manga </h1>
+        <div class="row mt-4">
             {% for manga in mangas %}
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">{{ manga.title }}</h5>
-                        <p class="card-text"><small class="text-muted">Author: {{ manga.author }}</small></p>
-                        <p><strong>Rating:</strong> ⭐ {{ manga.rating }}/10</p>
-                        <p><strong>Genre:</strong> {{ manga.genre }}</p>
-                        <a href="{{ url_for('manga_detail', id=manga.id) }}" class="btn btn-primary">View Details</a>
-
+                        <h5 class="card-title">📚 {{ manga.title }}</h5>
+                        <p class="card-text"><small class="text-muted">✍️ Author: {{ manga.author }}</small></p>
+                        <p><strong>⭐ Rating:</strong> {{ manga.rating }}/10</p>
+                        <p><strong>📜 Genre:</strong> {{ manga.genre }}</p>
+                        <a href="{{ url_for('manga_detail', id=manga.id) }}" class="btn btn-manga">View Details</a>
                     </div>
                 </div>
             </div>
