@@ -208,6 +208,13 @@ def favorites():
     return render_template("favorites.html", mangas=favorite_mangas)
 
 
+@app.route("/about")
+@login_required
+def about():
+    favorite_count = Favorite.query.filter_by(user_id=current_user.id).count()
+    return render_template("about.html", favorite_count=favorite_count)
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
