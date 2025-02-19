@@ -35,6 +35,14 @@ class Manga(db.Model):
     genre = db.Column(db.String(100), nullable=False)
 
 
+class Favorite(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    manga_id = db.Column(db.Integer, db.ForeignKey("manga.id"), nullable=False)
+    user = db.relationship("User", backref="favorites")
+    manga = db.relationship("Manga", backref="favorited_by")
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -169,10 +177,35 @@ def search():
     return render_template("search.html", mangas=mangas, query=query)
 
 
+@app.route("/favorite/<int:id>")
+@login_required
+def favorite_manga(id):
+    manga = Manga.query.get_or_404(id)
+    favorite = Favorite.query.filter_by(user_id=current_user.id, manga_id=id).first()
+
+    if favorite:
+        db.session.delete(favorite)
+        flash("Removed from favorites!")
+    else:
+        new_favorite = Favorite(user_id=current_user.id, manga_id=id)
+        db.session.add(new_favorite)
+        flash("Added to favorites!")
+
+    db.session.commit()
+    return redirect(url_for("manga_detail", id=id))
+
+
 @app.route("/top_mangas")
 def top_mangas():
     top_mangas = Manga.query.order_by(Manga.rating.desc()).limit(10).all()
     return render_template("top_mangas.html", mangas=top_mangas)
+
+
+@app.route("/favorites")
+@login_required
+def favorites():
+    favorite_mangas = [fav.manga for fav in current_user.favorites]
+    return render_template("favorites.html", mangas=favorite_mangas)
 
 
 if __name__ == "__main__":
