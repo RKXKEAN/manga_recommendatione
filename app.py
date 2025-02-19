@@ -78,13 +78,20 @@ def home():
 def register():
     if request.method == "POST":
         username = request.form["username"]
-        password = generate_password_hash(
-            request.form["password"], method="pbkdf2:sha256"
+        password = request.form["password"]
+
+        # ตรวจสอบว่าชื่อผู้ใช้นั้นมีอยู่แล้วในฐานข้อมูลหรือไม่
+        if User.query.filter_by(username=username).first():
+            flash("Username already exists. Please choose a different one.", "error")
+            return redirect(url_for("register"))
+
+        hashed_password = generate_password_hash(
+            password, method="pbkdf2:sha256", salt_length=16
         )
-        new_user = User(username=username, password=password)
+        new_user = User(username=username, password=hashed_password, is_admin=False)
         db.session.add(new_user)
         db.session.commit()
-        flash("Registered successfully!")
+        flash("Registration successful! You can now log in.", "success")
         return redirect(url_for("login"))
     return render_template("register.html")
 
