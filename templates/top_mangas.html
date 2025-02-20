@@ -57,6 +57,7 @@
             <thead class="table-dark">
                 <tr>
                     <th>🏅 Rank</th>
+                    <th>🖼️ Image</th>
                     <th>📖 Title</th>
                     <th>✍️ Author</th>
                     <th>⭐ Rating</th>
@@ -68,6 +69,10 @@
                 {% for manga in mangas %}
                 <tr>
                     <td><strong>#{{ loop.index }}</strong></td>
+                    <td>
+                        <img src="{{ manga.image_url }}" alt="{{ manga.title }}" class="img-fluid rounded"
+                            style="width: 70px; height: auto; border: 2px solid black;">
+                    </td> <!-- แสดงรูปภาพ -->
                     <td>{{ manga.title }}</td>
                     <td>{{ manga.author }}</td>
                     <td>⭐ {{ manga.rating }}/10</td>
