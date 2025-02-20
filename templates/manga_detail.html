@@ -51,25 +51,37 @@
         <a href="{{ url_for('home') }}" class="btn btn-manga mb-3">⬅ Back to Home</a>
         <div class="card p-4">
             <div class="card-body">
-                <h2 class="card-title">📖 {{ manga.title }}</h2>
-                <h5 class="text-muted">✍️ Author: {{ manga.author }}</h5>
-                <p><strong>⭐ Rating:</strong> {{ manga.rating }}/10</p>
-                <p><strong>📚 Genre:</strong> {{ manga.genre }}</p>
-                <p class="card-text">📜 {{ manga.description }}</p>
+                <div class="row align-items-center">
+                    <!-- 📷 ส่วนรูปภาพ -->
+                    <div class="col-md-4 text-center">
+                        <img src="{{ manga.image_url }}" alt="{{ manga.title }}" class="img-fluid rounded shadow-lg"
+                            style="max-width: 100%; height: auto; border: 3px solid black;">
+                    </div>
+
+                    <!-- 📝 ส่วนข้อมูล -->
+                    <div class="col-md-8">
+                        <h2 class="card-title">📖 {{ manga.title }}</h2>
+                        <h5 class="text-muted">✍️ Author: {{ manga.author }}</h5>
+                        <p><strong>⭐ Rating:</strong> {{ manga.rating }}/10</p>
+                        <p><strong>📚 Genre:</strong> {{ manga.genre }}</p>
+                        <p class="card-text">📜 {{ manga.description }}</p>
+
+                        <!-- 🌟 ปุ่ม Favorite -->
+                        <form action="{{ url_for('favorite_manga', id=manga.id) }}" method="get">
+                            <button type="submit" class="btn btn-warning">
+                                {% if manga in current_user.favorites|map(attribute='manga') %}
+                                ★ Remove from Favorites
+                                {% else %}
+                                ☆ Add to Favorites
+                                {% endif %}
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <form action="{{ url_for('favorite_manga', id=manga.id) }}" method="get">
-        <button type="submit" class="btn btn-warning">
-            {% if manga in current_user.favorites|map(attribute='manga') %}
-            ★ Remove from Favorites
-            {% else %}
-            ☆ Add to Favorites
-            {% endif %}
-        </button>
-    </form>
-
 </body>
+
 
 </html>

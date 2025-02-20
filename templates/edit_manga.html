@@ -116,6 +116,11 @@
                     <input type="text" class="form-control" id="author" name="author" value="{{ manga.author }}"
                         required>
                 </div>
+                <div class="mb-3">
+                    <label for="image_url" class="form-label">Image URL</label>
+                    <input type="url" class="form-control" id="image_url" name="image_url" value="{{ manga.image_url }}"
+                        required>
+                </div>
                 <button type="submit" class="btn btn-primary">Save Changes</button>
                 <a href="{{ url_for('admin') }}" class="btn btn-secondary">Cancel</a>
             </form>

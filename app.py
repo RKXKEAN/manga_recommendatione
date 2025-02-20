@@ -33,6 +33,7 @@ class Manga(db.Model):
     author = db.Column(db.String(100), nullable=False)
     rating = db.Column(db.Float, default=0.0)
     genre = db.Column(db.String(100), nullable=False)
+    image_url = db.Column(db.String(500), nullable=True)
 
 
 class Favorite(db.Model):
@@ -117,23 +118,28 @@ def admin():
 def add_manga():
     if not current_user.is_admin:
         return redirect(url_for("home"))
+
     if request.method == "POST":
         title = request.form["title"]
         description = request.form["description"]
         author = request.form["author"]
         rating = float(request.form["rating"])
-        genre = request.form["genre"]  # ⭐ รับ genre จากฟอร์ม
+        genre = request.form["genre"]
+        image_url = request.form["image_url"]  # ⭐ รับค่า URL รูปภาพ
+
         new_manga = Manga(
             title=title,
             description=description,
             author=author,
             rating=rating,
             genre=genre,
+            image_url=image_url,
         )
         db.session.add(new_manga)
         db.session.commit()
         flash("Manga added successfully!")
         return redirect(url_for("admin"))
+
     return render_template("add_manga.html")
 
 
@@ -148,6 +154,7 @@ def edit_manga(id):
         manga.title = request.form["title"]
         manga.description = request.form["description"]
         manga.author = request.form["author"]
+        manga.image_url = request.form["image_url"]  # ⭐ อัปเดตรูปภาพ
         db.session.commit()
         flash("Manga updated successfully!")
         return redirect(url_for("admin"))
