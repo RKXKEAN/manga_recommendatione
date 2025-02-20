@@ -70,9 +70,9 @@
                         <form action="{{ url_for('favorite_manga', id=manga.id) }}" method="get">
                             <button type="submit" class="btn btn-warning">
                                 {% if manga in current_user.favorites|map(attribute='manga') %}
-                                ★ Remove from Favorites
+                                ★ Remove from List
                                 {% else %}
-                                ☆ Add to Favorites
+                                ☆ Add to List
                                 {% endif %}
                             </button>
                         </form>
