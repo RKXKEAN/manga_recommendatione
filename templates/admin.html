@@ -18,36 +18,16 @@
             box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.98);
-            border: 5px solid black;
-            border-radius: 10px;
-            box-shadow: 5px 5px 0px black;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-        }
-
-        .btn-manga {
-            background: black;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-manga:hover {
-            background: white;
-            color: black;
-            border: 2px solid black;
-        }
-
         .title-box {
             border: 3px solid black;
             border-radius: 8px;
             padding: 10px 20px;
             display: inline-block;
             background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .table {
+            background-color: white;
         }
     </style>
 </head>
@@ -71,25 +51,39 @@
     <div class="container my-4">
         <h2 class="text-center title-box">🛠️ Manage Manga 🛠️</h2>
         <a href="{{ url_for('add_manga') }}" class="btn btn-success mb-3">➕ Add New Manga</a>
-        <div class="list-group">
-            {% for manga in mangas %}
-            <div class="list-group-item d-flex justify-content-between align-items-center card p-3">
-                <div>
-                    <h5>📖 {{ manga.title }}</h5>
-                    <p>📝 {{ manga.description[:100] }}...</p>
-                    <p><strong>✍️ Author:</strong> {{ manga.author }}</p>
-                    <p><strong>⭐ Rating:</strong> {{ manga.rating }}/10</p>
-                    <p><strong>📜 Genre:</strong> {{ manga.genre }}</p>
-                </div>
-                <div>
-                    <a href="{{ url_for('manga_detail', id=manga.id) }}" class="btn btn-info btn-sm">👁️ View</a>
-                    <a href="{{ url_for('edit_manga', id=manga.id) }}" class="btn btn-warning btn-sm">✏️ Edit</a>
-                    <form action="{{ url_for('delete_manga', id=manga.id) }}" method="POST" class="d-inline">
-                        <button type="submit" class="btn btn-danger btn-sm">🗑️ Delete</button>
-                    </form>
-                </div>
-            </div>
-            {% endfor %}
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>📖 Title</th>
+                        <th>📝 Description</th>
+                        <th>✍️ Author</th>
+                        <th>⭐ Rating</th>
+                        <th>📜 Genre</th>
+                        <th>⚙️ Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for manga in mangas %}
+                    <tr>
+                        <td>{{ manga.title }}</td>
+                        <td>{{ manga.description[:100] }}...</td>
+                        <td>{{ manga.author }}</td>
+                        <td>{{ manga.rating }}/10</td>
+                        <td>{{ manga.genre }}</td>
+                        <td>
+                            <a href="{{ url_for('manga_detail', id=manga.id) }}" class="btn btn-info btn-sm">👁️
+                                View</a>
+                            <a href="{{ url_for('edit_manga', id=manga.id) }}" class="btn btn-warning btn-sm">✏️
+                                Edit</a>
+                            <form action="{{ url_for('delete_manga', id=manga.id) }}" method="POST" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-sm">🗑️ Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 
