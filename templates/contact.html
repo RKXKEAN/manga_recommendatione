@@ -7,6 +7,7 @@
     <title>Contact Us - MyMangaVerse</title>
     <!-- เชื่อมต่อกับ Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         body {
             background: url('https://www.pixelstalk.net/wp-content/uploads/images6/Aesthetic-Manga-Wallpaper-HD.jpg') no-repeat center center fixed;
@@ -16,18 +17,24 @@
         }
 
         .content {
-            background-color: rgba(255, 255, 255, 0.98);
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             margin: 50px auto;
             max-width: 600px;
             /* จำกัดความกว้างของเนื้อหา */
+            opacity: 0;
+            /* เริ่มต้นที่ซ่อน */
+            transform: translateY(50px);
+            /* เริ่มจากด้านล่าง */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            /* เพิ่มแอนิเมชัน */
         }
 
         h1,
         h2 {
-            color: #020001;
+            color: #0b0004;
             /* สีชมพู */
         }
 
@@ -46,7 +53,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home')}}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('top_mangas') }}">🏆 Top Mangas</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('favorites') }}">List</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About Me</a></li>
@@ -65,7 +72,7 @@
         </div>
     </nav>
 
-    <div class="content">
+    <div class="content" data-aos="fade-up">
         <h1 class="mb-4">Contact Us</h1>
         <p>If you have any questions or comments, feel free to reach out to us!</p>
 
@@ -78,10 +85,25 @@
         <p>If you need assistance, please contact us directly via email or phone.</p>
     </div>
 
-    <!-- เชื่อมต่อกับ Bootstrap JS (Optional) -->
+    <!-- เชื่อมต่อกับ Bootstrap JS และ AOS JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // เริ่มต้น AOS
+        AOS.init({
+            duration: 1000,
+            once: true // แอนิเมชันจะเกิดขึ้นแค่ครั้งเดียว
+        });
+
+        // แสดงเนื้อหาพร้อมแอนิเมชัน
+        document.addEventListener("DOMContentLoaded", function () {
+            const content = document.querySelector('.content');
+            content.style.opacity = 1;
+            content.style.transform = 'translateY(0)';
+        });
+    </script>
 </body>
 
 </html>
