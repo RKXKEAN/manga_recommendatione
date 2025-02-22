@@ -5,37 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- เชื่อมต่อกับ Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Contact Us</h1>
-        <form method="POST">
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-            </div>
-            <button type="submit">Send Message</button>
-        </form>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <ul>
-            {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Contact Us</h1>
+        <p>If you have any questions or comments, feel free to reach out to us!</p>
+
+        <h2 class="mt-4">Contact Information</h2>
+        <p><strong>Owner:</strong> Your Name</p>
+        <p><strong>Email:</strong> your_email@example.com</p>
+        <p><strong>Phone:</strong> +123 456 7890</p>
+
+        <h2 class="mt-4">We Are Here to Help!</h2>
+        <p>If you need assistance, please contact us directly via email or phone.</p>
     </div>
+
+    <!-- เชื่อมต่อกับ Bootstrap JS (Optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
