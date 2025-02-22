@@ -32,7 +32,7 @@ Welcome to the Manga Recommendation Website! This project is designed to help us
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/RKXKEAN/manga_recommendation.git
+   git clone https://github.com/RKXKEAN/manga_recommendatione
    cd manga_recommendation
 
 2. Create a virtual environment and activate it:
