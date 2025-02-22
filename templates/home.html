@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - MyMangaVerse</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         body {
             background: url('https://wallpapercave.com/wp/wp12284333.jpg') no-repeat center center fixed;
@@ -16,6 +17,7 @@
         .navbar {
             border-bottom: 5px solid black;
             box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
+            animation: slideDown 0.8s ease-in-out;
         }
 
         .card {
@@ -34,6 +36,7 @@
             background: black;
             color: white;
             border: 2px solid white;
+            transition: 0.3s ease-in-out;
         }
 
         .btn-manga:hover {
@@ -49,6 +52,29 @@
             background: rgba(255, 255, 255, 0.95);
             border-radius: 10px;
             box-shadow: 5px 5px 0px black;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -85,10 +111,10 @@
     </nav>
 
     <div class="container mt-4 text-center">
-        <h1 class="title-box">MyMangaVerse </h1>
+        <h1 class="title-box">MyMangaVerse</h1>
         <div class="row mt-4">
             {% for manga in mangas %}
-            <div class="col-md-4">
+            <div class="col-md-4" data-aos="fade-up">
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">📖 {{ manga.title }}</h5>
@@ -104,6 +130,13 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
 </body>
 
 </html>
