@@ -52,7 +52,8 @@ Welcome to the Manga Recommendation Website! This project is designed to help us
 
 1. Ensure that your virtual environment is activated.
 2. Run the application using the following command:
-    python app.py
+    ```bash
+   python app.py
 
 ## Devoloper 
 
