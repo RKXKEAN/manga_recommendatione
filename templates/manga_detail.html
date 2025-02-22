@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ manga.title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         body {
             background: url('https://wallpapercave.com/wp/wp12284333.jpg') no-repeat center center fixed;
@@ -36,6 +37,7 @@
             background: black;
             color: white;
             border: 2px solid white;
+            transition: 0.3s ease-in-out;
         }
 
         .btn-manga:hover {
@@ -43,30 +45,35 @@
             color: black;
             border: 2px solid black;
         }
+
+        .img-fluid {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .img-fluid:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 
 <body>
-    <div class="container my-4">
+    <div class="container my-4" data-aos="fade-up">
         <a href="{{ url_for('home') }}" class="btn btn-manga mb-3">⬅ Back to Home</a>
-        <div class="card p-4">
+        <div class="card p-4" data-aos="zoom-in">
             <div class="card-body">
                 <div class="row align-items-center">
-                    <!-- 📷 ส่วนรูปภาพ -->
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-4 text-center" data-aos="fade-right">
                         <img src="{{ manga.image_url }}" alt="{{ manga.title }}" class="img-fluid rounded shadow-lg"
                             style="max-width: 100%; height: auto; border: 3px solid black;">
                     </div>
 
-                    <!-- 📝 ส่วนข้อมูล -->
-                    <div class="col-md-8">
+                    <div class="col-md-8" data-aos="fade-left">
                         <h2 class="card-title">📖 {{ manga.title }}</h2>
                         <h5 class="text-muted">✍️ Author: {{ manga.author }}</h5>
                         <p><strong>⭐ Rating:</strong> {{ manga.rating }}/10</p>
                         <p><strong>📚 Genre:</strong> {{ manga.genre }}</p>
                         <p class="card-text">📜 {{ manga.description }}</p>
 
-                        <!-- 🌟 ปุ่ม Favorite -->
                         <form action="{{ url_for('favorite_manga', id=manga.id) }}" method="get">
                             <button type="submit" class="btn btn-warning">
                                 {% if manga in current_user.favorites|map(attribute='manga') %}
@@ -81,7 +88,15 @@
             </div>
         </div>
     </div>
-</body>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+</body>
 
 </html>
