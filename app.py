@@ -229,6 +229,21 @@ def about():
     return render_template("about.html", favorite_count=favorite_count)
 
 
+@app.route("/contact", methods=["GET", "POST"])
+@login_required
+def contact():
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        message = request.form["message"]
+
+        # ที่นี่คุณสามารถเพิ่มโค้ดเพื่อจัดการข้อมูลที่ส่งเข้ามา เช่น ส่งอีเมล หรือบันทึกลงฐานข้อมูล
+        flash("Your message has been sent!", "success")
+        return redirect(url_for("contact"))
+
+    return render_template("contact.html")
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
