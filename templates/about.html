@@ -10,20 +10,21 @@
         @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
         body {
-            background: url('https://wallpapercave.com/wp/wp12284333.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background: #121212;
+            color: #e0e0e0;
             font-family: 'Comic Sans MS', cursive;
             animation: fadeIn 1s ease-in;
         }
 
         .navbar {
-            border-bottom: 3px solid black;
+            background: #1f1f1f;
+            border-bottom: 3px solid #333;
             box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
         }
 
         .profile-container {
             max-width: 700px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(40, 40, 40, 0.95);
             border-radius: 10px;
             padding: 20px;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
@@ -36,7 +37,7 @@
         }
 
         .profile-info {
-            background: white;
+            background: #1f1f1f;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
@@ -48,16 +49,16 @@
         }
 
         .btn-manga {
-            background: black;
-            color: white;
-            border: 2px solid white;
+            background: #333;
+            color: #e0e0e0;
+            border: 2px solid #e0e0e0;
             transition: 0.3s;
         }
 
         .btn-manga:hover {
-            background: white;
-            color: black;
-            border: 2px solid black;
+            background: #e0e0e0;
+            color: #121212;
+            border: 2px solid #121212;
         }
 
         @keyframes fadeIn {
@@ -85,7 +86,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="/">MyMangaVerse</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
